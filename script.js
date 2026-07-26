@@ -31,9 +31,7 @@ function render(lang) {
   document.getElementById("method-strip").innerHTML = `<span>${d.portfolio.methodLabel}</span><p>${d.portfolio.method}</p>`;
 
   setSection("programmes", d.programmes);
-  document.getElementById("direction-grid").innerHTML = d.programmes.directions.map(item => item.key === "bespoke"
-    ? `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><a href="#contact">${item.link} →</a></article>`
-    : `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><button class="direction-link" type="button" data-programme="${item.key}" aria-expanded="false">${item.link} →</button></article>`
+  document.getElementById("direction-grid").innerHTML = d.programmes.directions.map(item => `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><button class="direction-link" type="button" data-programme="${item.key}" aria-expanded="false">${item.link} →</button></article>`
   ).join("");
   document.querySelectorAll("[data-programme]").forEach(button => button.addEventListener("click", () => toggleProgramme(button.dataset.programme)));
   activeProgrammeKey = "";
@@ -116,7 +114,7 @@ async function loadDynamicContent() {
     const visibleServices = services.filter(x => (x.active || "").toLowerCase() === "yes").sort((a,b) => Number(a.sort_order)-Number(b.sort_order));
     if (visibleServices.length) {
       dynamicServiceGroups = {};
-      for (const key of ["regular", "team-building"]) {
+      for (const key of ["regular", "team-building", "bespoke"]) {
         const fallback = window.siteData[currentLang].programmes.detailGroups[key];
         dynamicServiceGroups[key] = { title:fallback.title, intro:fallback.intro, items:visibleServices.filter(x => x.category === key).map(x => ({
           title: escapeHtml(currentLang === "zh" ? x.title_zh : (x.title_en || x.title_zh)),

@@ -13,17 +13,23 @@ window.siteData = {
     programmes: { eyebrow: "Programmes & Services", title: "Tea culture for everyday learning, teams, and meaningful occasions", intro: "Sandy's work ranges from ongoing classes to corporate experiences and fully tailored cultural programmes. Each format keeps the same warmth and clarity while responding to a different group, purpose, and setting.", directions: [
       { key:"regular", tag: "For individuals", title: "Regular Classes", desc: "A weekly practice around solar terms, festivals, tea knowledge, relaxation, and meeting people with similar interests.", link: "Click to view details" },
       { key:"team-building", tag: "For teams", title: "Team Experiences", desc: "Tea tasting, brewing, sensory awareness, interaction, and craft—designed for a team to slow down and connect naturally.", link: "Click to view details" },
-      { key:"bespoke", tag: "For special occasions", title: "Bespoke Programmes", desc: "Themes, tea, timing, language, and hands-on activities designed around a private group, school, brand, or important guest.", link: "Contact me" }
+      { key:"bespoke", tag: "For special occasions", title: "Bespoke Programmes", desc: "Themes, tea, timing, language, and hands-on activities designed around a private group, school, brand, or important guest.", link: "Click to view details" }
     ], detailGroups: {
-      regular: { title:"Three ways to join regular classes", intro:"Choose one session, establish a weekly rhythm, or follow a full season of tea.", items:[
+      regular: { title:"Ways to join regular classes", intro:"Choose one session, establish a weekly rhythm, or follow a full season of tea.", items:[
         { title:"Single Tea Session", type:"About 90 minutes · S$45", desc:"Experience the current solar term or festival theme. No background is needed, and everything required is provided.", linkLabel:"Ask about the next session", link:"#contact" },
         { title:"Monthly Membership", type:"Once a week · S$160/month", desc:"A rolling weekly programme with changing themes and a regular community of tea friends.", linkLabel:"Ask about membership", link:"#contact" },
         { title:"Seasonal Series", type:"About 12 sessions · S$420/season", desc:"Follow one season in depth through solar terms, tea knowledge, mindful practice, and selected hands-on activities.", linkLabel:"Ask about the seasonal series", link:"#contact" }
       ]},
-      "team-building": { title:"Three team experience formats", intro:"From a gentle introduction to an in-depth cultural programme, the format can be matched to the team's time and purpose.", items:[
+      "team-building": { title:"Team experience", intro:"From a gentle introduction to an in-depth cultural programme, the format can be matched to the team's time and purpose.", items:[
         { title:"Meeting Through a Cup of Tea", type:"60–90 minutes · S$38/person", desc:"Taste one tea in depth and enter a calm tea practice together—an easy, welcoming way to pause and connect.", linkLabel:"Enquire about this format", link:"#contact" },
         { title:"Brewing Tea Together", type:"90–120 minutes · S$58/person", desc:"Meet the six tea categories, then brew and serve tea together through a practical team experience.", linkLabel:"Enquire about this format", link:"#contact" },
         { title:"Time, Place & People in Harmony", type:"2–3 hours · S$108/person", desc:"Solar-term culture, tasting and brewing across tea categories, sensory practice, and a hands-on activity in one deeper programme.", linkLabel:"Enquire about this format", link:"#contact" }
+      ]},
+      "bespoke": { title:"Customize your journey", intro:"From happy festivals to business meetings, services are customized based on your need.", items:[
+        { title:"Festival Workshop", type:"2–3 hours", desc:"A cultural experience tailored around Chinese and multicultural festivals.", linkLabel:"Enquire about this format", link:"#contact" },
+        { title:"Children's Tea Culture Experience", type:"2–3 hours", desc:"Children discover Chinese culture through tea, teaware, etiquette, stories, and safe hands-on practice.", linkLabel:"Enquire about this format", link:"#contact" },
+        { title:"Business Tea Conversation & VIP Hosting", type:"2–3 hours", desc:"Tea creates a calm and culturally meaningful setting for business conversations and VIP hosting.", linkLabel:"Enquire about this format", link:"#contact" },
+        { title:"Chinese Culture & Language Tutoring", type:"3–4 hours", desc:"Learn Chinese language and culture through tea, solar terms, festivals, and traditional stories.", linkLabel:"Enquire about this format", link:"#contact" }
       ]}
     }, scenariosEyebrow: "Occasions & Communities", scenariosTitle: "Designed around the people in the room", scenariosIntro: "From a child's first encounter with tea to an intimate business conversation, the experience is shaped around who is gathering and why.", scenarios: ["Festival workshops", "Employee birthdays", "Children's tea culture", "Chinese culture tutoring", "Business tea conversations", "VIP & client hosting", "Private gatherings", "Tea & mindful relaxation", "Schools & cultural institutions", "Brand & member events"] },
     activities: { eyebrow: "Activities & Updates", title: "Recent work, upcoming moments, and shared experience", intro: "Classes, gatherings, new themes, and reflections from participants—small records of how tea culture is being shared in real life.", items: [
@@ -57,18 +63,25 @@ window.siteData = {
     programmes: { eyebrow: "课程与服务", title: "让茶文化走进日常、团队与重要时刻", intro: "从持续开展的日常课程，到企业团队体验和专属文化项目，Sandy 会根据参与者、活动目的与现场空间，调整内容与节奏，同时保留温暖、清晰和可以实践的课堂体验。", directions: [
       { key:"regular", tag: "面向个人", title: "日常课程", desc: "以每周的一杯茶，让节气、节日、茶知识、放松与同好相聚自然进入生活。", link: "点击查看细节" },
       { key:"team-building", tag: "面向团队", title: "团建课程", desc: "将品茶、泡茶、五感觉察、互动和手作组合起来，让团队慢下来，自然交流与连接。", link: "点击查看细节" },
-      { key:"bespoke", tag: "面向特别场合", title: "定制课程与活动", desc: "围绕私人小组、学校、品牌或贵宾的需求，设计主题、茶品、时长、语言和手作内容。", link: "与我联系" }
+      { key:"bespoke", tag: "面向特别场合", title: "定制课程与活动", desc: "围绕私人小组、学校、品牌或贵宾的需求，设计主题、茶品、时长、语言和手作内容。", link: "点击查看细节" }
     ], detailGroups: {
-      regular: { title:"日常课程的三种参与方式", intro:"可以先体验一堂课，也可以建立每周的节奏，或跟着一个季节完整学习。", items:[
+      regular: { title:"日常课程的参与方式", intro:"可以先体验一堂课，也可以建立每周的节奏，或跟着一个季节完整学习。", items:[
         { title:"单次茶课", type:"约90分钟 · S$45", desc:"参加当期节气或节日主题，不需要任何基础，空手到场即可。", linkLabel:"咨询近期课表", link:"#contact" },
         { title:"月度会员", type:"每周一次 · S$160/月", desc:"每周滚动开展，主题持续变化，也在固定相聚中自然认识同好。", linkLabel:"咨询会员安排", link:"#contact" },
         { title:"节气季课", type:"一季约12次 · S$420/季", desc:"围绕一个季节系统连接节气、茶知识、身心练习与精选手作。", linkLabel:"咨询当季课程", link:"#contact" }
       ]},
-      "team-building": { title:"团建课程的三种体验方式", intro:"从轻松入门到完整的深度体验，可以根据团队的时间、人数和活动目标选择。", items:[
+      "team-building": { title:"团建课程的体验方式", intro:"从轻松入门到完整的深度体验，可以根据团队的时间、人数和活动目标选择。", items:[
         { title:"一杯茶的相遇", type:"60–90分钟 · S$38/人", desc:"深度品鉴一种茶，进入一段安静的茶道体验，适合轻松相聚和初次接触。", linkLabel:"咨询这个方案", link:"#contact" },
         { title:"一起泡一杯茶", type:"90–120分钟 · S$58/人", desc:"认识六大茶类，并由团队成员亲手泡茶、奉茶，在实践中建立连接。", linkLabel:"咨询这个方案", link:"#contact" },
         { title:"天时地利人和", type:"2–3小时 · S$108/人", desc:"将节气文化、六大茶类品鉴与冲泡、身心觉察和手作时光组合成一次深度体验。", linkLabel:"咨询这个方案", link:"#contact" }
+      ]},
+      "bespoke": { title:"定制课程的体验方式", intro:"从喜庆的节日主题到尊贵的商务体验，可以根据团队或个人的实际情况进行定制服务。", items:[
+        { title:"节日主题工作坊", type:"2-3小时", desc:"围绕春节、中秋、端午、母亲节、圣诞等节日定制文化体验。", linkLabel:"咨询这个方案", link:"#contact" },
+        { title:"儿童茶文化体验", type:"2-3小时", desc:"通过认识茶叶、茶具、礼仪、传统故事与安全实操，让儿童亲近中国文化。", linkLabel:"咨询这个方案", link:"#contact" },
+        { title:"商务与贵宾接待", type:"2–3小时", desc:"以茶营造安静、自然、有文化质感的商务交流与贵宾接待空间。", linkLabel:"咨询这个方案", link:"#contact" },
+        { title:"中国文化与私教", type:"3-4小时", desc:"通过茶、节气、节日和传统故事学习中文与中国文化。", linkLabel:"咨询这个方案", link:"#contact" }
       ]}
+
     }, scenariosEyebrow: "适合的场合与人群", scenariosTitle: "为相聚的理由，也为在场的每一个人", scenariosIntro: "从孩子第一次认识茶，到一场安静从容的商务交流，内容会围绕参与者和活动目的自然展开。", scenarios: ["节日工作坊", "员工生日与团队庆祝", "儿童茶文化体验", "中国文化与中文私教", "商务茶叙", "贵宾与客户接待", "私人聚会与生日", "茶与身心放松", "学校与文化机构", "品牌与会员活动"] },
     activities: { eyebrow: "活动与动态", title: "近期工作、活动消息与学员反馈", intro: "课程、相聚、新的主题，以及参与者留下的感受——记录茶文化如何真实地发生在人与人的连接之中。", items: [
       { type: "过往活动", title: "茶文化体验", desc: "为成人、儿童、学校、团队和私人小组开展的精选课程与茶会。", image: "assets/tea-session.jpg" },
