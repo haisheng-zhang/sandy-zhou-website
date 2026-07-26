@@ -107,6 +107,36 @@ async function fetchSheet(url) {
   return parseCsv(await response.text());
 }
 
+function activitySort(a, b) {
+  const aOrder = Number.parseFloat(a.sort_order);
+  const bOrder = Number.parseFloat(b.sort_order);
+  const aHasOrder = Number.isFinite(aOrder);
+  const bHasOrder = Number.isFinite(bOrder);
+  if (aHasOrder && bHasOrder && aOrder !== bOrder) return aOrder - bOrder;
+  if (aHasOrder !== bHasOrder) return aHasOrder ? -1 : 1;
+  return new Date(b.publish_date || 0) - new Date(a.publish_date || 0);
+}
+
+function publicImageUrl(value) {
+  const url = (value || "").trim();
+  if (!url) return "";
+  if (!/^(assets\/|https?:\/\/|data:image\/)/i.test(url)) return "";
+  const driveFile = url.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+  const driveId = driveFile?.[1] || new URLSearchParams(url.split("?")[1] || "").get("id");
+  if (driveId && /drive\.google\.com/i.test(url)) {
+    return `https://drive.google.com/thumbnail?id=${encodeURIComponent(driveId)}&sz=w1600`;
+  }
+  return url;
+}
+
+function renderActivityImages(item, title) {
+  const images = [item.cover_image, item.image_2, item.image_3]
+    .map(publicImageUrl)
+    .filter(Boolean);
+  if (!images.length) return "";
+  return `<div class="activity-gallery activity-gallery-${Math.min(images.length, 3)}">${images.map((src, index) => `<img src="${escapeHtml(src)}" alt="${escapeHtml(title)}${images.length > 1 ? ` ${index + 1}` : ""}" loading="lazy" onerror="this.hidden=true" />`).join("")}</div>`;
+}
+
 async function loadDynamicContent() {
   const config = window.contentConfig || {};
   try {
@@ -130,9 +160,14 @@ async function loadDynamicContent() {
 
   try {
     const activities = await fetchSheet(config.activitiesCsvUrl);
-    const visibleActivities = activities.filter(x => (x.visible || "").toLowerCase() === "yes" && x.type !== "feedback").sort((a,b) => new Date(b.publish_date)-new Date(a.publish_date));
-    if (visibleActivities.length) document.getElementById("activity-grid").innerHTML = visibleActivities.map(x => `<article class="activity-card">${x.cover_image ? `<img src="${escapeHtml(x.cover_image)}" alt="" />` : ""}<div><p class="card-tag">${escapeHtml(x.type)}</p><h3>${escapeHtml(currentLang === "zh" ? x.title_zh : (x.title_en || x.title_zh))}</h3><p>${escapeHtml(currentLang === "zh" ? x.summary_zh : (x.summary_en || x.summary_zh))}</p>${x.external_url || x.xiaohongshu_url || x.tiktok_url ? `<a class="programme-link" href="${escapeHtml(x.external_url || x.xiaohongshu_url || x.tiktok_url)}" target="_blank" rel="noopener">${currentLang === "zh" ? "查看详情" : "View update"} →</a>` : ""}</div></article>`).join("");
-    const feedback = activities.filter(x => (x.visible || "").toLowerCase() === "yes" && x.type === "feedback");
+    const isVisible = x => (x.visible || "").trim().toLowerCase() === "yes";
+    const isFeedback = x => (x.type || "").trim().toLowerCase() === "feedback";
+    const visibleActivities = activities.filter(x => isVisible(x) && !isFeedback(x)).sort(activitySort);
+    if (visibleActivities.length) document.getElementById("activity-grid").innerHTML = visibleActivities.map(x => {
+      const title = currentLang === "zh" ? x.title_zh : (x.title_en || x.title_zh);
+      return `<article class="activity-card">${renderActivityImages(x, title)}<div><p class="card-tag">${escapeHtml(x.type)}</p><h3>${escapeHtml(title)}</h3><p>${escapeHtml(currentLang === "zh" ? x.summary_zh : (x.summary_en || x.summary_zh))}</p>${x.external_url || x.xiaohongshu_url || x.tiktok_url ? `<a class="programme-link" href="${escapeHtml(x.external_url || x.xiaohongshu_url || x.tiktok_url)}" target="_blank" rel="noopener">${currentLang === "zh" ? "查看详情" : "View update"} →</a>` : ""}</div></article>`;
+    }).join("");
+    const feedback = activities.filter(x => isVisible(x) && isFeedback(x)).sort(activitySort);
     if (feedback.length) document.getElementById("testimonial-grid").innerHTML = feedback.map(x => `<article class="testimonial-card"><p>“${escapeHtml(currentLang === "zh" ? x.feedback_text_zh : (x.feedback_text_en || x.feedback_text_zh))}”</p><strong>${escapeHtml(x.feedback_name)}</strong></article>`).join("");
   } catch (error) { console.warn("Activities sheet unavailable; fixed content is shown.", error); }
 }
