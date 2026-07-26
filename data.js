@@ -16,7 +16,7 @@ window.siteData = {
       { key:"bespoke", tag: "For special occasions", title: "Bespoke Programmes", desc: "Themes, tea, timing, language, and hands-on activities designed around a private group, school, brand, or important guest.", link: "Contact me" }
     ], detailGroups: {
       regular: { title:"Three ways to join regular classes", intro:"Choose one session, establish a weekly rhythm, or follow a full season of tea.", items:[
-        { title:"Single Tea Session", type:"About 90 minutes · S$45", desc:"Experience the current solar term or festival theme. No background is needed, and everything required is provided.", linkLabel:"Ask about the next session", link:"https://wa.me/6585060153" },
+        { title:"Single Tea Session", type:"About 90 minutes · S$45", desc:"Experience the current solar term or festival theme. No background is needed, and everything required is provided.", linkLabel:"Ask about the next session", link:"#contact" },
         { title:"Monthly Membership", type:"Once a week · S$160/month", desc:"A rolling weekly programme with changing themes and a regular community of tea friends.", linkLabel:"Ask about membership", link:"#contact" },
         { title:"Seasonal Series", type:"About 12 sessions · S$420/season", desc:"Follow one season in depth through solar terms, tea knowledge, mindful practice, and selected hands-on activities.", linkLabel:"Ask about the seasonal series", link:"#contact" }
       ]},
@@ -60,7 +60,7 @@ window.siteData = {
       { key:"bespoke", tag: "面向特别场合", title: "定制课程与活动", desc: "围绕私人小组、学校、品牌或贵宾的需求，设计主题、茶品、时长、语言和手作内容。", link: "与我联系" }
     ], detailGroups: {
       regular: { title:"日常课程的三种参与方式", intro:"可以先体验一堂课，也可以建立每周的节奏，或跟着一个季节完整学习。", items:[
-        { title:"单次茶课", type:"约90分钟 · S$45", desc:"参加当期节气或节日主题，不需要任何基础，空手到场即可。", linkLabel:"咨询近期课表", link:"https://wa.me/6585060153" },
+        { title:"单次茶课", type:"约90分钟 · S$45", desc:"参加当期节气或节日主题，不需要任何基础，空手到场即可。", linkLabel:"咨询近期课表", link:"#contact" },
         { title:"月度会员", type:"每周一次 · S$160/月", desc:"每周滚动开展，主题持续变化，也在固定相聚中自然认识同好。", linkLabel:"咨询会员安排", link:"#contact" },
         { title:"节气季课", type:"一季约12次 · S$420/季", desc:"围绕一个季节系统连接节气、茶知识、身心练习与精选手作。", linkLabel:"咨询当季课程", link:"#contact" }
       ]},
