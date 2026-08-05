@@ -35,7 +35,7 @@ window.siteData = {
         { src: "assets/signature-tasting.jpg", alt: "Tea poured into cups at the tea table" },
         { src: "assets/signature-ritual.jpg", alt: "Washing of the hands before tea" },
         { src: "assets/signature-craft.jpg", alt: "Filling a handmade tea eye pillow" },
-        { src: "assets/signature-rest.jpg", alt: "Participants resting with tea eye pillows" },
+        { src: "assets/signature-flower.jpg", alt: "Participants learning flowering" },
         { src: "assets/signature-making.jpg", alt: "Two participants sewing their eye pillows" },
         { src: "assets/signature-materials.jpg", alt: "Tea, threads, and a finished eye pillow" }
       ]
@@ -119,7 +119,7 @@ window.siteData = {
         { src: "assets/signature-tasting.jpg", alt: "茶席上正在分茶" },
         { src: "assets/signature-ritual.jpg", alt: "行茶前的浴手" },
         { src: "assets/signature-craft.jpg", alt: "手工填制茶香眼枕" },
-        { src: "assets/signature-rest.jpg", alt: "学员戴上茶香眼枕休息" },
+        { src: "assets/signature-flower.jpg", alt: "学员学习花艺" },
         { src: "assets/signature-making.jpg", alt: "两位学员一起缝制眼枕" },
         { src: "assets/signature-materials.jpg", alt: "茶叶、绣线与完成的眼枕" }
       ]
