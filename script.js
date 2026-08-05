@@ -19,6 +19,13 @@ function render(lang) {
   ["eyebrow", "title", "subtitle", "zh"].forEach(k => { document.getElementById(`hero-${k}`).textContent = d.hero[k]; });
   document.getElementById("hero-primary-link").textContent = d.hero.primary;
   document.getElementById("hero-secondary-link").textContent = d.hero.secondary;
+  document.getElementById("hero-signature-link").innerHTML = `
+    <img src="assets/signature-thumb.jpg" alt="" loading="lazy" />
+    <span class="signature-shortcut-body">
+      <span class="signature-shortcut-meta">${d.hero.signatureMeta}</span>
+      <span class="signature-shortcut-cta">${d.hero.signature}</span>
+    </span>
+    <span class="signature-shortcut-arrow" aria-hidden="true">→</span>`;
 
   setSection("about", d.about);
   document.getElementById("about-copy").innerHTML = d.about.content.map(p => `<p>${p}</p>`).join("");
@@ -31,6 +38,7 @@ function render(lang) {
   document.getElementById("method-strip").innerHTML = `<span>${d.portfolio.methodLabel}</span><p>${d.portfolio.method}</p>`;
 
   setSection("programmes", d.programmes);
+  renderSignature(d.programmes.signature);
   document.getElementById("direction-grid").innerHTML = d.programmes.directions.map(item => `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><button class="direction-link" type="button" data-programme="${item.key}" aria-expanded="false">${item.link} →</button></article>`
   ).join("");
   document.querySelectorAll("[data-programme]").forEach(button => button.addEventListener("click", () => toggleProgramme(button.dataset.programme)));
@@ -63,18 +71,56 @@ function render(lang) {
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
-function toggleProgramme(key) {
+function renderSignature(block) {
+  document.getElementById("signature").innerHTML = `
+    <div class="signature-body">
+      <p class="card-tag">${block.tag}</p>
+      <h3>${block.title}</h3>
+      <p class="signature-flow">${block.flow}</p>
+      <p class="signature-teaser">${block.teaser}</p>
+      <p class="signature-note">${block.noteShort}</p>
+      <button class="direction-link" type="button" data-programme="signature" aria-expanded="false">${block.cta} →</button>
+    </div>
+    <div class="signature-cover"><img src="${block.cover.src}" alt="${block.cover.alt}" loading="lazy" /></div>`;
+}
+
+function signatureDetailHtml(block, group) {
+  return `
+    <div class="programme-detail-heading"><h3>${group.title}</h3><p>${group.intro}</p></div>
+    <ol class="signature-steps">${block.steps.map((step, i) => `<li><span class="signature-step-index">${String(i + 1).padStart(2, "0")}</span><strong>${step.label}</strong><p>${step.text}</p></li>`).join("")}</ol>
+    <div class="programme-card-grid">${group.items.map(programmeItemHtml).join("")}</div>
+    <p class="signature-note">${block.priceNote}</p>
+    <div class="signature-strip">${block.gallery.map(photo => `<img src="${photo.src}" alt="${photo.alt}" loading="lazy" />`).join("")}</div>
+    <p class="eyebrow signature-feedback-label">${block.feedbackLabel}</p>
+    <div class="testimonial-grid">${block.feedback.map(item => `<blockquote class="testimonial-card">${item.image ? `<img src="${item.image.src}" alt="${item.image.alt}" loading="lazy" />` : ""}<p>“${item.text}”</p><strong>${item.name}</strong></blockquote>`).join("")}</div>`;
+}
+
+function toggleProgramme(key, scrollToDetail = true) {
   activeProgrammeKey = activeProgrammeKey === key ? "" : key;
   document.querySelectorAll("[data-programme]").forEach(button => button.setAttribute("aria-expanded", String(button.dataset.programme === activeProgrammeKey)));
   renderProgrammeDetail(activeProgrammeKey);
+  if (!scrollToDetail || !activeProgrammeKey) return;
+  const detail = document.getElementById("programme-detail");
+  detail.scrollIntoView({ behavior: "smooth", block: "start" });
+  detail.classList.remove("is-arriving");
+  void detail.offsetWidth;
+  detail.classList.add("is-arriving");
+}
+
+function programmeItemHtml(item) {
+  return `<article class="programme-item"><div class="programme-type">${item.type}</div><h3>${item.title}</h3><p class="programme-desc">${item.desc}</p><a class="programme-link" href="${item.link}" ${item.link.startsWith("#") ? "" : 'target="_blank" rel="noopener"'}>${item.linkLabel} →</a></article>`;
 }
 
 function renderProgrammeDetail(key) {
   const detail = document.getElementById("programme-detail");
-  if (!key) { detail.innerHTML = ""; detail.classList.remove("is-open"); return; }
-  const group = (dynamicServiceGroups && dynamicServiceGroups[key]) || window.siteData[currentLang].programmes.detailGroups[key];
+  if (!key) { detail.innerHTML = ""; detail.classList.remove("is-open", "is-signature"); return; }
+  const programmes = window.siteData[currentLang].programmes;
+  const group = (dynamicServiceGroups && dynamicServiceGroups[key]) || programmes.detailGroups[key];
   if (!group) return;
-  detail.innerHTML = `<div class="programme-detail-heading"><h3>${group.title}</h3><p>${group.intro}</p></div><div class="programme-card-grid">${group.items.map(item => `<article class="programme-item"><div class="programme-type">${item.type}</div><h3>${item.title}</h3><p class="programme-desc">${item.desc}</p><a class="programme-link" href="${item.link}" ${item.link.startsWith("#") ? "" : 'target="_blank" rel="noopener"'}>${item.linkLabel} →</a></article>`).join("")}</div>`;
+  detail.classList.toggle("is-signature", key === "signature");
+  detail.innerHTML = key === "signature"
+    ? signatureDetailHtml(programmes.signature, group)
+    : `<div class="programme-detail-heading"><h3>${group.title}</h3><p>${group.intro}</p></div><div class="programme-card-grid">${group.items.map(programmeItemHtml).join("")}</div>`;
   detail.classList.add("is-open");
 }
 

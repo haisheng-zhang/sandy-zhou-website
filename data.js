@@ -1,7 +1,7 @@
 window.siteData = {
   en: {
     nav: ["About Sandy", "Course Portfolio", "Programmes", "Activities", "Selected Goods", "Contact"],
-    hero: { eyebrow: "Sandy Zhou", title: "Tea, culture, and mindful living", subtitle: "Tea Culture Promoter · International Chinese Teacher · Yoga Tutor", zh: "用一杯茶，助人放松，回归平衡。", primary: "Explore programmes", secondary: "Contact Sandy" },
+    hero: { eyebrow: "Sandy Zhou", title: "Tea, culture, and mindful living", subtitle: "Tea Culture Promoter · International Chinese Teacher · Yoga Tutor", zh: "用一杯茶，助人放松，回归平衡。", primary: "Explore programmes", secondary: "Contact Sandy", signature: "Explore Signature Experiences", signatureMeta: "Signature · 2.5 hours · S$108 per person" },
     about: { eyebrow: "About Sandy", title: "Tea Culture Promoter | International Chinese Teacher | Yoga Tutor", content: ["Using a cup of tea to help people relax and return to balance.", "With years of experience in tea culture and mind-body teaching, Sandy's work is built on the core philosophy of ‘Experience × Awareness × Daily Application.’", "She transforms Chinese tea culture into simple, practical ways of living, accompanying people to find relaxation and calm amidst a busy life."] },
     principles: { workEyebrow: "What I Do", workTitle: "Culture made present", workCopy: "Through tea, culture, education, and simple daily practices, I help people slow down, reconnect, and return to balance.", approachEyebrow: "My Approach", approachTitle: "Experience → Understanding → Daily Practice", approachCopy: "Meaningful traditions become simple, warm, and sustainable practices that can naturally enter modern life." },
     portfolio: { eyebrow: "Course Portfolio", title: "Forty-four lessons shaped by the living rhythm of tea", intro: "The curriculum follows the changing seasons and the cultural life around tea. Knowledge, sensory experience, gentle body awareness, and hands-on practice come together in a structure designed for modern life in Singapore.", items: [
@@ -10,11 +10,45 @@ window.siteData = {
       { count: "6", title: "Six Tea Categories", desc: "Green · White · Yellow · Oolong · Black · Dark tea", details: "A closer look at craftsmanship, aroma, liquor, tasting, brewing, and the character of each tea category." },
       { count: "4", title: "Tea Culture Foundations", desc: "Brewing well · Choosing tea · Tea-table aesthetics · Teaware", details: "Practical foundations that make tea understandable, approachable, and useful in everyday life." }
     ], methodLabel: "Learning through experience", method: "Each lesson begins with tea itself. Tasting and observation open the way to one clear cultural idea, followed by a gentle awareness practice and something to try by hand. The aim is not to finish a body of theory, but to leave with an experience that can continue in daily life." },
-    programmes: { eyebrow: "Programmes & Services", title: "Tea culture for everyday learning, teams, and meaningful occasions", intro: "Sandy's work ranges from ongoing classes to corporate experiences and fully tailored cultural programmes. Each format keeps the same warmth and clarity while responding to a different group, purpose, and setting.", directions: [
+    programmes: { eyebrow: "Programmes & Services", title: "Tea culture for everyday learning, teams, and meaningful occasions", intro: "Sandy's work ranges from ongoing classes to corporate experiences and fully tailored cultural programmes. Each format keeps the same warmth and clarity while responding to a different group, purpose, and setting.", signature: {
+      tag: "Signature · For teams and private groups",
+      title: "Signature Tea Experience",
+      flow: "Tea Ritual · Tea Tasting · Creative Experience",
+      teaser: "One complete session: the tea ritual, a tasting across the six tea categories, and a hands-on piece chosen for the group.",
+      noteShort: "2.5 hours · S$108 per person",
+      cta: "View the full experience",
+      cover: { src: "assets/signature-session.jpg", alt: "A group at the tea table during a signature session" },
+      steps: [
+        { label: "Tea Ritual", text: "Washing of the hands, a moment of stillness, and the nine steps of serving tea." },
+        { label: "Tea Tasting", text: "A tasting across the six tea categories, closing with a blind tasting." },
+        { label: "Creative Experience", text: "One piece made by hand during the session and taken home." }
+      ],
+      priceNote: "Shorter formats follow the team experience rates: 60–90 minutes at S$38 and 90–120 minutes at S$58 per person.",
+      feedbackLabel: "Participant feedback",
+      feedback: [
+        { text: "It felt less like a class and more like rest.", name: "Participant", image: { src: "assets/feedback-eyepillow.jpg", alt: "A participant resting with a handmade tea eye pillow" } },
+        { text: "The child loves this handmade eye pillow. The gentle tea aroma helps her fall asleep quickly.", name: "Participant", image: { src: "assets/feedback-child.jpg", alt: "A child asleep with a handmade tea eye pillow" } },
+        { text: "The session felt calm, gentle, and grounded. Tea became something we could actually bring into daily life.", name: "Participant" },
+        { text: "My eyes were dry and I hardly wanted to move them. After the practice they turned easily again, and I felt more relaxed.", name: "Participant" }
+      ],
+      gallery: [
+        { src: "assets/signature-tasting.jpg", alt: "Tea poured into cups at the tea table" },
+        { src: "assets/signature-ritual.jpg", alt: "Washing of the hands before tea" },
+        { src: "assets/signature-craft.jpg", alt: "Filling a handmade tea eye pillow" },
+        { src: "assets/signature-rest.jpg", alt: "Participants resting with tea eye pillows" },
+        { src: "assets/signature-making.jpg", alt: "Two participants sewing their eye pillows" },
+        { src: "assets/signature-materials.jpg", alt: "Tea, threads, and a finished eye pillow" }
+      ]
+    }, directions: [
       { key:"regular", tag: "For individuals", title: "Regular Classes", desc: "A weekly practice around solar terms, festivals, tea knowledge, relaxation, and meeting people with similar interests.", link: "Click to view details" },
       { key:"team-building", tag: "For teams", title: "Team Experiences", desc: "Tea tasting, brewing, sensory awareness, interaction, and craft—designed for a team to slow down and connect naturally.", link: "Click to view details" },
       { key:"bespoke", tag: "For special occasions", title: "Bespoke Programmes", desc: "Themes, tea, timing, language, and hands-on activities designed around a private group, school, brand, or important guest.", link: "Click to view details" }
     ], detailGroups: {
+      signature: { title:"The structure of a signature session", intro:"The tea ritual and the tasting remain the same in every session. The hands-on experience is chosen for the group. Tea, teaware, and materials are prepared for each participant.", items:[
+        { title:"Tea & Eye Pillow", type:"2.5 hours · S$108/person", desc:"Tea leaves and dried flowers are blended, then filled and sewn into an eye pillow or aroma sachet.", linkLabel:"Enquire about this format", link:"#contact" },
+        { title:"Tea & Micro Planting", type:"2.5 hours · S$108/person", desc:"A succulent or a small tea-table landscape is planted after the tasting.", linkLabel:"Enquire about this format", link:"#contact" },
+        { title:"Tea & Floral Art", type:"2.5 hours · S$108/person", desc:"Seasonal flowers are arranged in the restraint and spacing of the tea table.", linkLabel:"Enquire about this format", link:"#contact" }
+      ]},
       regular: { title:"Ways to join regular classes", intro:"Choose one session, establish a weekly rhythm, or follow a full season of tea.", items:[
         { title:"Single Tea Session", type:"About 90 minutes · S$45", desc:"Experience the current solar term or festival theme. No background is needed, and everything required is provided.", linkLabel:"Ask about the next session", link:"#contact" },
         { title:"Monthly Membership", type:"Once a week · S$160/month", desc:"A rolling weekly programme with changing themes and a regular community of tea friends.", linkLabel:"Ask about membership", link:"#contact" },
@@ -51,7 +85,7 @@ window.siteData = {
   },
   zh: {
     nav: ["关于 Sandy", "课程作品", "课程与服务", "活动与动态", "精选好物", "联系合作"],
-    hero: { eyebrow: "Sandy Zhou", title: "茶 · 文化 · 慢生活", subtitle: "茶文化推广者 · 国际中文教师 · 瑜伽导师", zh: "Tea, Culture, and Mindful Living", primary: "查看课程与服务", secondary: "联系 Sandy" },
+    hero: { eyebrow: "Sandy Zhou", title: "茶 · 文化 · 慢生活", subtitle: "茶文化推广者 · 国际中文教师 · 瑜伽导师", zh: "Tea, Culture, and Mindful Living", primary: "查看课程与服务", secondary: "联系 Sandy", signature: "了解精品体验课", signatureMeta: "精品体验 · 2.5 小时 · S$108/人" },
     about: { eyebrow: "关于 Sandy", title: "茶文化推广者 | 国际中文教师 | 瑜伽导师", content: ["用一杯茶，助人放松，回归平衡。", "拥有多年的茶文化与身心教学经验，Sandy 的工作建立在“体验 × 觉察 × 日常应用”的核心理念之上。", "她将中国茶文化转化为简单、实用的生活方式，陪伴人们在忙碌的生活中找到放松与平静。"] },
     principles: { workEyebrow: "核心工作", workTitle: "让文化回到当下", workCopy: "通过茶、文化、教育和简单的日常练习，帮助人们慢下来，重新连接自己，回归平衡。", approachEyebrow: "核心理念", approachTitle: "体验 → 理解 → 日常实践", approachCopy: "让有意义的传统变得简单、温暖且可持续，自然融入现代生活。" },
     portfolio: { eyebrow: "课程作品", title: "循着四时与茶香展开的四十四讲", intro: "以四季节气和茶文化为经纬，将茶的知识、感官体验、身心觉察与动手实践编织在一起。这套课程回应现代生活，也充分考虑新加坡的气候与生活节奏。", items: [
@@ -60,11 +94,45 @@ window.siteData = {
       { count: "6", title: "六大茶类课程", desc: "绿茶 · 白茶 · 黄茶 · 乌龙茶 · 红茶 · 黑茶", details: "从制作工艺、香气、茶汤、品鉴与冲泡，深入理解每一类茶独有的性格。" },
       { count: "4", title: "茶文化基础课", desc: "泡好一杯茶 · 选择适合自己的茶 · 茶席美学 · 茶具", details: "建立清晰、亲切、能在日常生活中真正使用的茶文化基础。" }
     ], methodLabel: "从体验中理解", method: "每一讲都从一杯茶开始。品饮与观察带出一个清楚的文化重点，再通过温和的身心觉察和动手实践加深感受。课程不追求一次讲完所有理论，而是让学员带走一种能够继续融入日常的体验。" },
-    programmes: { eyebrow: "课程与服务", title: "让茶文化走进日常、团队与重要时刻", intro: "从持续开展的日常课程，到企业团队体验和专属文化项目，Sandy 会根据参与者、活动目的与现场空间，调整内容与节奏，同时保留温暖、清晰和可以实践的课堂体验。", directions: [
+    programmes: { eyebrow: "课程与服务", title: "让茶文化走进日常、团队与重要时刻", intro: "从持续开展的日常课程，到企业团队体验和专属文化项目，Sandy 会根据参与者、活动目的与现场空间，调整内容与节奏，同时保留温暖、清晰和可以实践的课堂体验。", signature: {
+      tag: "精品体验 · 团队与私人小组",
+      title: "精品茶体验课",
+      flow: "行茶 · 品茗 · 生活美学手作",
+      teaser: "一场完整的体验：行茶、六大茶类品茗，以及一项为团队选定的手作。",
+      noteShort: "2.5 小时 · S$108/人",
+      cta: "查看完整课程",
+      cover: { src: "assets/signature-session.jpg", alt: "精品体验课上的茶席与学员" },
+      steps: [
+        { label: "行茶", text: "浴手、静心，与行茶九步法。" },
+        { label: "品茗", text: "六大茶类品鉴，以一轮盲品收束。" },
+        { label: "生活美学手作", text: "一件在课堂内完成、可以带走的作品。" }
+      ],
+      priceNote: "其他时长与团建课程同价：60–90 分钟 S$38/人，90–120 分钟 S$58/人。",
+      feedbackLabel: "学员反馈",
+      feedback: [
+        { text: "不像上课，更像在休息。", name: "学员", image: { src: "assets/feedback-eyepillow.jpg", alt: "学员戴着手作茶香眼枕休息" } },
+        { text: "孩子很喜欢这个手作眼枕，茶香淡淡，很快入睡了。", name: "学员", image: { src: "assets/feedback-child.jpg", alt: "孩子戴着手作茶香眼枕入睡" } },
+        { text: "整个过程让人感到平静、温柔且踏实。茶成为了可以真正带入生活的东西。", name: "学员" },
+        { text: "原本眼睛干燥、甚至不太想动，在练习之后，眼球转动变得轻松、灵活，整个人也更放松了。", name: "学员" }
+      ],
+      gallery: [
+        { src: "assets/signature-tasting.jpg", alt: "茶席上正在分茶" },
+        { src: "assets/signature-ritual.jpg", alt: "行茶前的浴手" },
+        { src: "assets/signature-craft.jpg", alt: "手工填制茶香眼枕" },
+        { src: "assets/signature-rest.jpg", alt: "学员戴上茶香眼枕休息" },
+        { src: "assets/signature-making.jpg", alt: "两位学员一起缝制眼枕" },
+        { src: "assets/signature-materials.jpg", alt: "茶叶、绣线与完成的眼枕" }
+      ]
+    }, directions: [
       { key:"regular", tag: "面向个人", title: "日常课程", desc: "以每周的一杯茶，让节气、节日、茶知识、放松与同好相聚自然进入生活。", link: "点击查看细节" },
       { key:"team-building", tag: "面向团队", title: "团建课程", desc: "将品茶、泡茶、五感觉察、互动和手作组合起来，让团队慢下来，自然交流与连接。", link: "点击查看细节" },
       { key:"bespoke", tag: "面向特别场合", title: "定制课程与活动", desc: "围绕私人小组、学校、品牌或贵宾的需求，设计主题、茶品、时长、语言和手作内容。", link: "点击查看细节" }
     ], detailGroups: {
+      signature: { title:"精品体验课的结构", intro:"行茶与品茗是每一场的固定内容，手作部分依团队而定。茶叶、茶具与手作材料均已为每位学员备妥。", items:[
+        { title:"茶与眼枕", type:"2.5 小时 · S$108/人", desc:"以茶叶与干花调配，填制并缝合一只茶香眼枕或香包。", linkLabel:"咨询这个方案", link:"#contact" },
+        { title:"茶与微景观", type:"2.5 小时 · S$108/人", desc:"品茗之后，种下一盆多肉或一处小型茶席景观。", linkLabel:"咨询这个方案", link:"#contact" },
+        { title:"茶与花艺", type:"2.5 小时 · S$108/人", desc:"以茶席的克制与留白，插一束当季的花。", linkLabel:"咨询这个方案", link:"#contact" }
+      ]},
       regular: { title:"日常课程的参与方式", intro:"可以先体验一堂课，也可以建立每周的节奏，或跟着一个季节完整学习。", items:[
         { title:"单次茶课", type:"约90分钟 · S$45", desc:"参加当期节气或节日主题，不需要任何基础，空手到场即可。", linkLabel:"咨询近期课表", link:"#contact" },
         { title:"月度会员", type:"每周一次 · S$160/月", desc:"每周滚动开展，主题持续变化，也在固定相聚中自然认识同好。", linkLabel:"咨询会员安排", link:"#contact" },
