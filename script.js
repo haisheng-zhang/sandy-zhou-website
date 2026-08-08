@@ -38,6 +38,7 @@ function render(lang) {
   document.getElementById("method-strip").innerHTML = `<span>${d.portfolio.methodLabel}</span><p>${d.portfolio.method}</p>`;
 
   setSection("programmes", d.programmes);
+  document.getElementById("programmes-brochure").innerHTML = brochureLinkHtml("overview");
   renderSignature(d.programmes.signature);
   document.getElementById("direction-grid").innerHTML = d.programmes.directions.map(item => `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><button class="direction-link" type="button" data-programme="${item.key}" aria-expanded="false">${item.link} →</button></article>`
   ).join("");
@@ -67,6 +68,13 @@ function render(lang) {
   document.getElementById("form-link").style.display = formUrl ? "inline-flex" : "none";
   document.getElementById("form-note").style.display = d.contact.formNote ? "block" : "none";
   document.getElementById("contact-items").innerHTML = d.contact.items.map(item => `<div class="contact-item"><div class="contact-label">${item.label}</div><div class="contact-value"><a href="${item.href}" target="_blank" rel="noopener">${item.value}</a></div></div>`).join("");
+  const downloads = d.contact.downloads;
+  const available = downloads.items.filter(item => brochureUrl(item.key));
+  document.getElementById("downloads").innerHTML = available.length ? `
+    <p class="eyebrow">${downloads.eyebrow}</p>
+    <h3 class="downloads-title">${downloads.title}</h3>
+    <div class="downloads-grid">${available.map(item => `<a class="download-card" href="${brochureUrl(item.key)}" target="_blank" rel="noopener"><span class="brochure-tag">PDF</span><span>${item.title}</span><span class="download-arrow" aria-hidden="true">↓</span></a>`).join("")}</div>` : "";
+
   document.querySelector(".footer-tagline").textContent = d.footer;
   document.getElementById("year").textContent = new Date().getFullYear();
 }
@@ -107,6 +115,18 @@ function toggleProgramme(key, scrollToDetail = true) {
   detail.classList.add("is-arriving");
 }
 
+function brochureUrl(key) {
+  const entry = ((window.contentConfig || {}).brochures || {})[key];
+  return (entry && entry[currentLang]) || "";
+}
+
+function brochureLinkHtml(key) {
+  const url = brochureUrl(key);
+  if (!url) return "";
+  const label = window.siteData[currentLang].programmes.brochure[key];
+  return `<a class="brochure-link" href="${url}" target="_blank" rel="noopener"><span class="brochure-tag">PDF</span>${label}</a>`;
+}
+
 function programmeItemHtml(item) {
   return `<article class="programme-item"><div class="programme-type">${item.type}</div><h3>${item.title}</h3><p class="programme-desc">${item.desc}</p><a class="programme-link" href="${item.link}" ${item.link.startsWith("#") ? "" : 'target="_blank" rel="noopener"'}>${item.linkLabel} →</a></article>`;
 }
@@ -120,7 +140,7 @@ function renderProgrammeDetail(key) {
   detail.classList.toggle("is-signature", key === "signature");
   detail.innerHTML = key === "signature"
     ? signatureDetailHtml(programmes.signature, group)
-    : `<div class="programme-detail-heading"><h3>${group.title}</h3><p>${group.intro}</p></div><div class="programme-card-grid">${group.items.map(programmeItemHtml).join("")}</div>`;
+    : `<div class="programme-detail-heading"><h3>${group.title}</h3><p>${group.intro}</p>${brochureLinkHtml(key)}</div><div class="programme-card-grid">${group.items.map(programmeItemHtml).join("")}</div>`;
   detail.classList.add("is-open");
 }
 
