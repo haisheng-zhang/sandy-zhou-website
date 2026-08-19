@@ -28,7 +28,8 @@ function render(lang) {
     <span class="signature-shortcut-arrow" aria-hidden="true">→</span>`;
 
   setSection("about", d.about);
-  document.getElementById("about-copy").innerHTML = d.about.content.map(p => `<p>${p}</p>`).join("");
+  document.getElementById("about-copy").innerHTML = d.about.content.map(p => `<p>${p}</p>`).join("")
+    + (d.about.credentials ? `<p class="about-credentials">${d.about.credentials}</p>` : "");
   ["workEyebrow", "workTitle", "workCopy", "approachEyebrow", "approachTitle", "approachCopy"].forEach(k => {
     document.getElementById(k.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`)).textContent = d.principles[k];
   });
@@ -67,7 +68,14 @@ function render(lang) {
   document.getElementById("form-link").href = formUrl || "#";
   document.getElementById("form-link").style.display = formUrl ? "inline-flex" : "none";
   document.getElementById("form-note").style.display = d.contact.formNote ? "block" : "none";
-  document.getElementById("contact-items").innerHTML = d.contact.items.map(item => `<div class="contact-item"><div class="contact-label">${item.label}</div><div class="contact-value"><a href="${item.href}" target="_blank" rel="noopener">${item.value}</a></div></div>`).join("");
+  document.getElementById("contact-items").innerHTML = d.contact.items.map(item => {
+    const links = item.links || [{ text: item.value, href: item.href }];
+    const value = links.map(link => {
+      const external = /^https?:/i.test(link.href) ? ' target="_blank" rel="noopener"' : "";
+      return `<a href="${link.href}"${external}>${link.text}</a>${link.note ? `<span class="contact-note">${link.note}</span>` : ""}`;
+    }).join('<span class="contact-sep">·</span>');
+    return `<div class="contact-item"><div class="contact-label">${item.label}</div><div class="contact-value">${value}</div></div>`;
+  }).join("");
   const downloads = d.contact.downloads;
   const available = downloads.items.filter(item => brochureUrl(item.key));
   document.getElementById("downloads").innerHTML = available.length ? `
