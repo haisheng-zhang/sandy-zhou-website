@@ -44,6 +44,14 @@ function render(lang) {
   document.getElementById("direction-grid").innerHTML = d.programmes.directions.map(item => `<article class="direction-card"><p class="card-tag">${item.tag}</p><h3>${item.title}</h3><p>${item.desc}</p><button class="direction-link" type="button" data-programme="${item.key}" aria-expanded="false">${item.link} →</button></article>`
   ).join("");
   document.querySelectorAll("[data-programme]").forEach(button => button.addEventListener("click", () => toggleProgramme(button.dataset.programme)));
+  document.querySelectorAll(".signature-video").forEach(button => button.addEventListener("click", () => {
+    const iframe = document.createElement("iframe");
+    iframe.src = button.dataset.video + "?autoplay=1";
+    iframe.allow = "autoplay; fullscreen";
+    iframe.allowFullscreen = true;
+    iframe.title = button.getAttribute("aria-label");
+    button.replaceWith(iframe);
+  }));
   activeProgrammeKey = "";
   document.getElementById("programme-detail").innerHTML = "";
   document.getElementById("scenarios-eyebrow").textContent = d.programmes.scenariosEyebrow;
@@ -97,7 +105,7 @@ function renderSignature(block) {
       <p class="signature-note">${block.noteShort}</p>
       <button class="direction-link" type="button" data-programme="signature" aria-expanded="false">${block.cta} →</button>
     </div>
-    <div class="signature-cover"><img src="${block.cover.src}" alt="${block.cover.alt}" loading="lazy" /></div>`;
+    <div class="signature-cover"><button class="signature-video" type="button" data-video="${block.cover.video}" aria-label="${block.cover.alt}"><img src="${block.cover.poster}" alt="${block.cover.alt}" loading="lazy" /><span class="signature-video-play" aria-hidden="true"></span></button></div>`;
 }
 
 function signatureDetailHtml(block, group) {
