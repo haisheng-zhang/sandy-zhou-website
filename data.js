@@ -17,7 +17,7 @@ window.siteData = {
       teaser: "One complete session: the tea ritual, a tasting across the six tea categories, and one hands-on piece chosen for the group—floral arrangement, micro planting, or a tea eye pillow.",
       noteShort: "1-3 hours · S$38-108 per person",
       cta: "View the full experience",
-      cover: { video: "https://drive.google.com/file/d/1dbc5r9JKOcVjHww2WYVyCqzBOrHHghV_/preview", poster: "assets/signature-video-cover.jpg", alt: "Introduction video: tea, floral art, and handcraft experiences" },
+      cover: { video: "assets/signature-video.mp4", poster: "assets/signature-video-cover.jpg", alt: "Introduction video: tea, floral art, and handcraft experiences" },
       steps: [
         { label: "Tea Ritual", text: "Washing of the hands, a moment of stillness, and the nine steps of serving tea." },
         { label: "Tea Tasting", text: "A tasting across the six tea categories, closing with a blind tasting." },
@@ -105,7 +105,7 @@ window.siteData = {
       teaser: "一场完整的体验：行茶、六大茶类品茗，以及一项为团队选定的手作——插花、微植栽或茶香眼枕。",
       noteShort: "1-3 小时 · S$38-108/人",
       cta: "查看完整课程",
-      cover: { video: "https://drive.google.com/file/d/1dbc5r9JKOcVjHww2WYVyCqzBOrHHghV_/preview", poster: "assets/signature-video-cover.jpg", alt: "课程介绍视频：茶艺、花道与手作体验" },
+      cover: { video: "assets/signature-video.mp4", poster: "assets/signature-video-cover.jpg", alt: "课程介绍视频：茶艺、花道与手作体验" },
       steps: [
         { label: "行茶", text: "浴手、静心，与行茶九步法。" },
         { label: "品茗", text: "六大茶类品鉴，以一轮盲品收束。" },
