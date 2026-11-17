@@ -211,6 +211,58 @@ function renderActivityImages(item, title) {
   return `<div class="activity-gallery activity-gallery-${Math.min(images.length, 3)}">${images.map((src, index) => `<img src="${escapeHtml(src)}" alt="${escapeHtml(title)}${images.length > 1 ? ` ${index + 1}` : ""}" loading="lazy" onerror="this.hidden=true" />`).join("")}</div>`;
 }
 
+// Links to a resource (image, video, PDF, Office file, Drive file) open in the
+// on-page viewer; anything else is a normal external link in a new tab.
+function viewerHtml(href, cardImageIds = []) {
+  const url = (href || "").trim();
+  const src = escapeHtml(url);
+  const drive = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/i);
+  if (drive) {
+    const id = encodeURIComponent(drive[1]);
+    // The same Drive file as one of the card images is known to be an image.
+    if (cardImageIds.includes(drive[1])) return `<img src="https://drive.google.com/thumbnail?id=${id}&sz=w2400" alt="" />`;
+    return `<iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  }
+  const doc = url.match(/docs\.google\.com\/(document|presentation|spreadsheets)\/d\/([\w-]+)/i);
+  if (doc) return `<iframe src="https://docs.google.com/${doc[1]}/d/${encodeURIComponent(doc[2])}/preview" allowfullscreen></iframe>`;
+  const youtube = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]+)/i);
+  if (youtube) return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(youtube[1])}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  if (!/^(https?:\/\/|assets\/|documents\/)/i.test(url)) return "";
+  const ext = (url.split(/[?#]/)[0].match(/\.(\w+)$/) || [])[1]?.toLowerCase();
+  if (["jpg", "jpeg", "png", "webp", "gif"].includes(ext)) return `<img src="${src}" alt="" />`;
+  if (["mp4", "webm", "mov", "m4v"].includes(ext)) return `<video src="${src}" controls autoplay playsinline></video>`;
+  if (ext === "pdf") return `<iframe src="${src}"></iframe>`;
+  if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext) && /^https?:\/\//i.test(url)) return `<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}"></iframe>`;
+  return "";
+}
+
+function openViewer(html, href) {
+  const viewer = document.getElementById("media-viewer");
+  viewer.querySelector(".media-viewer-body").innerHTML = html;
+  const original = viewer.querySelector(".media-viewer-open");
+  original.hidden = !href;
+  if (href) { original.href = href; original.textContent = currentLang === "zh" ? "在新窗口打开 ↗" : "Open in new tab ↗"; }
+  viewer.showModal();
+}
+
+document.getElementById("activity-grid").addEventListener("click", event => {
+  const card = event.target.closest(".activity-card");
+  if (!card) return;
+  const image = event.target.closest(".activity-gallery img");
+  if (image) return openViewer(`<img src="${escapeHtml(image.src.replace(/sz=w\d+/, "sz=w2400"))}" alt="${escapeHtml(image.alt)}" />`);
+  const link = event.target.closest("a.programme-link");
+  if (!link) return;
+  const imageIds = [...card.querySelectorAll(".activity-gallery img")].map(img => new URL(img.src).searchParams.get("id")).filter(Boolean);
+  const html = viewerHtml(link.getAttribute("href"), imageIds);
+  if (!html) return;
+  event.preventDefault();
+  openViewer(html, link.href);
+});
+
+const mediaViewer = document.getElementById("media-viewer");
+mediaViewer.addEventListener("click", event => { if (event.target === mediaViewer || event.target.closest(".media-viewer-close")) mediaViewer.close(); });
+mediaViewer.addEventListener("close", () => { mediaViewer.querySelector(".media-viewer-body").innerHTML = ""; });
+
 async function loadDynamicContent() {
   const config = window.contentConfig || {};
   try {
@@ -239,7 +291,8 @@ async function loadDynamicContent() {
     const visibleActivities = activities.filter(x => isVisible(x) && !isFeedback(x)).sort(activitySort);
     if (visibleActivities.length) document.getElementById("activity-grid").innerHTML = visibleActivities.map(x => {
       const title = currentLang === "zh" ? x.title_zh : (x.title_en || x.title_zh);
-      return `<article class="activity-card">${renderActivityImages(x, title)}<div><p class="card-tag">${escapeHtml(x.type)}</p><h3>${escapeHtml(title)}</h3><p>${escapeHtml(currentLang === "zh" ? x.summary_zh : (x.summary_en || x.summary_zh))}</p>${x.external_url || x.xiaohongshu_url || x.tiktok_url ? `<a class="programme-link" href="${escapeHtml(x.external_url || x.xiaohongshu_url || x.tiktok_url)}" target="_blank" rel="noopener">${currentLang === "zh" ? "查看详情" : "View update"} →</a>` : ""}</div></article>`;
+      const link = [x.external_url, x.video_url, x.xiaohongshu_url, x.tiktok_url].map(v => (v || "").trim()).find(v => /^(https?:\/\/|assets\/|documents\/|#)/i.test(v));
+      return `<article class="activity-card">${renderActivityImages(x, title)}<div><p class="card-tag">${escapeHtml(x.type)}</p><h3>${escapeHtml(title)}</h3><p>${escapeHtml(currentLang === "zh" ? x.summary_zh : (x.summary_en || x.summary_zh))}</p>${link ? `<a class="programme-link" href="${escapeHtml(link)}" target="_blank" rel="noopener">${currentLang === "zh" ? "查看详情" : "Learn more"} →</a>` : ""}</div></article>`;
     }).join("");
     const feedback = activities.filter(x => isVisible(x) && isFeedback(x)).sort(activitySort);
     if (feedback.length) document.getElementById("testimonial-grid").innerHTML = feedback.map(x => `<article class="testimonial-card"><p>“${escapeHtml(currentLang === "zh" ? x.feedback_text_zh : (x.feedback_text_en || x.feedback_text_zh))}”</p><strong>${escapeHtml(x.feedback_name)}</strong></article>`).join("");
